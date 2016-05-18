@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" href="css/fonts/font-awesome.min.css">
+        <link rel="stylesheet" href="css/ui-box.css">
+        <link rel="stylesheet" href="css/ui-base.css">
+        <link rel="stylesheet" href="css/ui-color.css">
+        <link rel="stylesheet" href="css/appcan.icon.css">
+        <link rel="stylesheet" href="css/appcan.control.css">
+        <link rel="stylesheet" href="css/my.css"/>
+    </head>
+    <body class="um-vp bc-bg" ontouchstart>
+        <div class="mybtn" id="btn1">
+            platformName
+        </div>
+        <div class="mybtn" id="btn2">
+            platformVersion
+        </div>
+        <div class="mybtn1" id="btn3">
+            ios7Style
+        </div>
+        <div class="mybtn2" id="btn4">
+            isFullScreen
+        </div>
+        <div class="mybtn3" id="btn5">
+            getplatform
+        </div>
+        <div class="mybtn4" id="btn6">
+            exit
+        </div>
+        <div class="mybtn6" id="btn7">
+            getCurrentWidgetInfo
+        </div>
+        <div class="mybtn1" id="btn8">
+            cleanCache
+        </div>
+        <div class="mybtn" id="btn9">
+            getMainWidgetId
+        </div>
+        <script src="js/appcan.js"></script>
+        <script src="js/appcan.control.js"></script>
+    </body>
+    <script>
+        window.uexOnload = function() {
+            uexWidgetOne.cbGetPlatform = function(opId, dataType, data) {
+                if (data == 0) {
+                    alert("IOS系统");
+                } else if (data == 1) {
+                    alert("Android系统");
+                }
+            }
+            uexWidgetOne.cbGetCurrentWidgetInfo = function(opId, dataType, data) {
+                // var obj = eval('(' + data + ')');
+                // alert(obj.widgetId);
+                alert(data);
+            }
+            uexWidgetOne.cbCleanCache = function(opId, dataType, data) {
+                if (data == 0) {
+                    alert("清除成功")
+                } else {
+                    alert("非主widget不能清除cache")
+                }
+            }
+            uexWidgetOne.cbGetMainWidgetId = function(opId, dataType, data) {
+                alert("主widgetId为：" + data);
+            }
+            uexWidgetOne.cbError = function(opId, dataType, data) {
+                alert(data);
+                console.log(data);
+
+            }
+        }
+        appcan.button("#btn1", "ani-act", function() {
+            alert('系统为:' + uexWidgetOne.platformName);
+        })
+        appcan.button("#btn2", "ani-act", function() {
+            alert('系统版本为:' + uexWidgetOne.platformVersion);
+        })
+        appcan.button("#btn3", "ani-act", function() {
+            alert('应用是否为iOS7风格:' + uexWidgetOne.iOS7Style);
+        })
+        appcan.button("#btn4", "ani-act", function() {
+            alert('应用是否为全屏:' + uexWidgetOne.isFullScreen);
+        })
+        appcan.button("#btn5", "ani-act", function() {
+            uexWidgetOne.getPlatform();
+        })
+        appcan.button("#btn6", "ani-act", function() {
+            uexWidgetOne.exit();
+        })
+        appcan.button("#btn7", "ani-act", function() {
+            uexWidgetOne.getCurrentWidgetInfo();
+        })
+        appcan.button("#btn8", "ani-act", function() {
+            uexWidgetOne.cleanCache();
+        })
+        appcan.button("#btn9", "ani-act", function() {
+            uexWidgetOne.getMainWidgetId();
+        })
+    </script>
+</html>
